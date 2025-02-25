@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { validateLoginForm } from "@/utils/validate";
 import LoaderComponent from "./loaderComponent";
+import { fetchUrlLogin } from "@/utils/fetchUrl";
 
 const LoginForm = ({ className, ...props }) => {
   const [email, setEmail] = useState("");
@@ -30,7 +31,7 @@ const LoginForm = ({ className, ...props }) => {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:3000/api/login", {
+      const response = await fetch(fetchUrlLogin, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

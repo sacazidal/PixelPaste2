@@ -10,6 +10,7 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import { EmailConfirmationDialog } from "./AlertDialog";
 import { validateRegisterForm } from "@/utils/validate";
+import { fetchUrlRegister } from "@/utils/fetchUrl";
 
 const RegisterForm = ({ className, ...props }) => {
   const [email, setEmail] = useState("");
@@ -40,7 +41,7 @@ const RegisterForm = ({ className, ...props }) => {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:3000/api/register", {
+      const response = await fetch(fetchUrlRegister, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

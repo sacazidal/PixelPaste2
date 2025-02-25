@@ -1,5 +1,6 @@
 "use client";
 
+import { fetchUrlProtected } from "@/utils/fetchUrl";
 import { useEffect, useState } from "react";
 
 const useAuth = () => {
@@ -12,7 +13,7 @@ const useAuth = () => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/protected", {
+        const response = await fetch(fetchUrlProtected, {
           method: "GET",
           credentials: "include",
         });

@@ -10,13 +10,14 @@ import {
 } from "./ui/dropdown-menu";
 import { ChevronDown, LogOut, UserPen } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { fetchUrlLogout } from "@/utils/fetchUrl";
 
 const LogoutButton = () => {
   const { userData } = useAuth();
 
   const handleLogout = async () => {
     try {
-      await fetch("http://localhost:3000/api/logout", {
+      await fetch(fetchUrlLogout, {
         method: "POST",
         credentials: "include",
       });
