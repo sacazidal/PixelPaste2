@@ -6,7 +6,9 @@ export const authenticate = (handler) => async (req) => {
   const token = await getCookie("token", { req });
 
   if (!token) {
-    return NextResponse.json({ error: "Токен отсутствует" }, { status: 401 });
+    req.user = null;
+
+    return handler(req);
   }
 
   try {
@@ -17,6 +19,7 @@ export const authenticate = (handler) => async (req) => {
     return handler(req);
   } catch (error) {
     console.error("Ошибка при проверке токена:", error);
+    req.user = null;
     return NextResponse.json({ error: error.message }, { status: 401 });
   }
 };

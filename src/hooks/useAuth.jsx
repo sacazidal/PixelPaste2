@@ -18,16 +18,28 @@ const useAuth = () => {
           credentials: "include",
         });
 
-        if (!response.ok) {
-          throw new Error("Ошибка авторизации");
+        if (response.ok) {
+          const data = await response.json();
+          if (data.user) {
+            setAuthState({
+              isAuthenticated: true,
+              userData: data.user,
+              isLoading: false,
+            });
+          } else {
+            setAuthState({
+              isAuthenticated: false,
+              userData: null,
+              isLoading: false,
+            });
+          }
+        } else {
+          setAuthState({
+            isAuthenticated: false,
+            userData: null,
+            isLoading: false,
+          });
         }
-
-        const data = await response.json();
-        setAuthState({
-          isAuthenticated: true,
-          userData: data,
-          isLoading: false,
-        });
       } catch (error) {
         console.error(error);
         setAuthState({

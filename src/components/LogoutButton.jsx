@@ -11,9 +11,11 @@ import {
 import { ChevronDown, LogOut, UserPen } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { fetchUrlLogout } from "@/utils/fetchUrl";
+import { useRouter } from "next/navigation";
 
 const LogoutButton = () => {
   const { userData } = useAuth();
+  const { push } = useRouter();
 
   const handleLogout = async () => {
     try {
@@ -26,6 +28,10 @@ const LogoutButton = () => {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const handleProfile = () => {
+    push(`/profile/${userData.username}`);
   };
 
   return (
@@ -44,7 +50,10 @@ const LogoutButton = () => {
           )}
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-36 bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-lg shadow-lg">
-          <DropdownMenuItem className="px-4 py-1 hover:bg-gray-100 dark:hover:border-neutral-800 flex justify-center">
+          <DropdownMenuItem
+            onClick={handleProfile}
+            className="px-4 py-1 hover:bg-gray-100 dark:hover:border-neutral-800 flex justify-center"
+          >
             <UserPen />
             <span>Профиль</span>
           </DropdownMenuItem>

@@ -5,7 +5,7 @@ import Loader from "@/components/Loader";
 import useAuth from "@/hooks/useAuth";
 
 export default function Home() {
-  const { userData, isLoading } = useAuth();
+  const { isAuthenticated, userData, isLoading } = useAuth();
 
   if (isLoading) {
     return <Loader />;
@@ -14,7 +14,11 @@ export default function Home() {
   return (
     <div>
       <Header />
-      <h1>Добро пожаловать, {userData.username}!</h1>
+      {isAuthenticated ? (
+        <h1>Добро пожаловать, {userData.username}!</h1>
+      ) : (
+        <h1>Добро пожаловать!</h1>
+      )}
     </div>
   );
 }

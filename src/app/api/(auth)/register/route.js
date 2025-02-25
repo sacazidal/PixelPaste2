@@ -32,7 +32,7 @@ export async function POST(request) {
     await client.query("BEGIN");
 
     const existingUser = await client.query(
-      `SELECT * FROM users WHERE email = $1 or username = $2`,
+      `SELECT email, username FROM users WHERE email = $1 or username = $2`,
       [email, username]
     );
 

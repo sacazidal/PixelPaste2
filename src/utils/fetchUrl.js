@@ -17,3 +17,8 @@ export const fetchUrlRegister =
   process.env.NODE_ENV === "production"
     ? "/api/register"
     : "http://localhost:3000/api/register";
+
+export const fetchUrlUpdateData =
+  process.env.NODE_ENV === "production"
+    ? "/api/updateData"
+    : "http://localhost:3000/api/updateData";
